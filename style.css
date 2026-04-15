@@ -1,4 +1,5 @@
 :root {
+    /* Dark Theme (Default) */
     --bg-color: #050507;
     --card-bg: rgba(255, 255, 255, 0.04);
     --border-color: rgba(255, 255, 255, 0.1);
@@ -14,6 +15,18 @@
     --glass-blur: 16px;
     --transition-fast: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
     --transition-smooth: 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    --nav-bg: rgba(5, 5, 7, 0.8);
+}
+
+[data-theme="light"] {
+    --bg-color: #f7f6f0; /* Creamy White */
+    --card-bg: rgba(0, 0, 0, 0.03);
+    --border-color: rgba(0, 0, 0, 0.08);
+    --text-main: #1a1a1c;
+    --text-dim: #64748b;
+    --primary: #7c3aed;
+    --secondary: #0891b2;
+    --nav-bg: rgba(247, 246, 240, 0.8);
 }
 
 * {
@@ -28,9 +41,19 @@ body {
     color: var(--text-main);
     overflow-x: hidden;
     min-height: 100vh;
+    transition: background-color var(--transition-smooth), color var(--transition-smooth);
+}
+
+[data-theme="dark"] body {
     background-image: 
         radial-gradient(circle at 0% 0%, rgba(139, 92, 246, 0.05) 0%, transparent 40%),
         radial-gradient(circle at 100% 100%, rgba(6, 182, 212, 0.05) 0%, transparent 40%);
+}
+
+[data-theme="light"] body {
+    background-image: 
+        radial-gradient(circle at 0% 0%, rgba(124, 58, 237, 0.03) 0%, transparent 40%),
+        radial-gradient(circle at 100% 100%, rgba(8, 145, 178, 0.03) 0%, transparent 40%);
 }
 
 #app {
@@ -49,7 +72,7 @@ nav {
     align-items: center;
     padding: 1.5rem 2rem;
     backdrop-filter: blur(var(--glass-blur));
-    background: var(--card-bg);
+    background: var(--nav-bg);
     border-bottom: 1px solid var(--border-color);
     position: sticky;
     top: 0;
@@ -68,6 +91,7 @@ nav {
 .nav-links {
     display: flex;
     gap: 1.5rem;
+    align-items: center;
 }
 
 .nav-btn {
@@ -92,6 +116,25 @@ nav {
 
 .nav-btn:hover {
     color: var(--text-main);
+}
+
+.theme-toggle {
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: var(--text-main);
+    transition: var(--transition-fast);
+}
+
+.theme-toggle:hover {
+    transform: rotate(15deg);
+    border-color: var(--primary);
 }
 
 /* Main Content */
@@ -128,8 +171,8 @@ main {
 }
 
 .glass-card:hover {
-    border-color: rgba(255, 255, 255, 0.2);
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    border-color: rgba(139, 92, 246, 0.3);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
 }
 
 h1, h2, h3 {
@@ -148,7 +191,7 @@ h1, h2, h3 {
 .hero-suggestion {
     position: relative;
     overflow: hidden;
-    background: linear-gradient(135deg, rgba(139, 92, 246, 0.1), rgba(6, 182, 212, 0.1));
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.05), rgba(6, 182, 212, 0.05));
 }
 
 .weather-widget {
@@ -179,11 +222,13 @@ h1, h2, h3 {
     font-size: 0.85rem;
     cursor: pointer;
     transition: var(--transition-fast);
+    color: var(--text-dim);
 }
 
 .filter-chip.active {
     background: var(--primary);
     border-color: var(--primary);
+    color: white;
 }
 
 .clothes-grid {
@@ -208,7 +253,7 @@ h1, h2, h3 {
     width: 100%;
     aspect-ratio: 4/5;
     object-fit: cover;
-    background: #111;
+    background: rgba(0,0,0,0.05);
 }
 
 .item-info {
@@ -223,9 +268,9 @@ h1, h2, h3 {
     text-transform: uppercase;
 }
 
-.status-clean { background: rgba(16, 185, 129, 0.1); color: var(--accent-green); }
-.status-dirty { background: rgba(239, 68, 68, 0.1); color: var(--accent-red); }
-.status-wash { background: rgba(6, 182, 212, 0.1); color: var(--secondary); }
+.status-disponibile { background: rgba(16, 185, 129, 0.1); color: var(--accent-green); }
+.status-sporco { background: rgba(239, 68, 68, 0.1); color: var(--accent-red); }
+.status-lavaggio { background: rgba(6, 182, 212, 0.1); color: var(--secondary); }
 
 /* Forms */
 .btn-primary {
@@ -252,6 +297,16 @@ h1, h2, h3 {
 }
 
 .upload-zone:hover { border-color: var(--primary); }
+
+.glass-input {
+    width: 100%;
+    padding: 0.8rem;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    color: var(--text-main);
+    outline: none;
+}
 
 /* Responsive */
 @media (max-width: 768px) {
